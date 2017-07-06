@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" > 
+	
+<mapper namespace="com.oracle.beipro.dao.OrderDao">
+	<select id="getOrdreList" resultType="com.oracle.beipro.order.entity.Order">
+		select date,oid,successCount,refundCount,orderNumber,orderCount
+			from pro_order;
+	</select>
+</mapper>
