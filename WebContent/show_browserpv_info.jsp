@@ -6,22 +6,28 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body onload="selecttimes()">
 
+<!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+    	<h5>请您选择要查询的日期：</h5>
+    <input id = "times" type="date" value="2017-06-19"  onchange="selecttimes()" />
 <div id="mainBar"
 		style="height: 500px; border: 1px solid #ccc; padding: 10px;"></div>
-	<script src="js/echarts.js"></script>
-	<script src="js/jquery.min.js"></script>
-	<script type="text/javascript">
-	
-	
+<script src="js/echarts.js"></script>
+<script src="js/jquery.min.js"></script>
+<script type="text/javascript">
+
 		var myChart;
 		var option;		
-		require.config({paths : { echarts : './js'} } );
+		require.config({
+			paths : {
+				echarts : './js'
+			}
+		});
 		require(
 				[
 				//这里的'echarts'相当于'./js'  
-				'echarts', 'echarts/chart/bar', 'echarts/chart/line','echarts/chart/pie',],
+				'echarts', 'echarts/chart/bar', 'echarts/chart/line'],
 				//创建ECharts图表方法  
 				function(ec) {
 					//--- 折柱 ---  
@@ -32,26 +38,29 @@
 				});
 		
 		var i=199;
+		
+		var sdate;
+		function selecttimes(){
+			sdate = document.getElementById('times').value;
+			console.log(sdate);	
+			test();
+		}
+		
 		function test()
 		{
-			var listXaxis = [1,1,1];
-			var oid = [1,1,1];
-			var successCount = [1,1,1];
-			var refundCount = [1,1,1]; 
-			var orderCount = [1,1,1];
-			$.ajax({url:"/BigData/order/orderList.xhtml",type:"GET",success:function(msg){
+			var browser = [1,1,1];
+			var adduserCount = [1,1,1];
+			
+			$.ajax({url:"/BigData/browser/browserpvList.xhtml",data : {sdate : sdate},type:"GET",success:function(msg){
 				
-				listXaxis=msg.listXaxis;
-				oid=msg.oidData;
-				successCount=msg.successData;
-				refundCount=msg.refundData;
-				orderCount=msg.orderData;
+				browser = msg.browserData;
+				adduserCount=msg.adduserData;
 				
 				option = {
 						//标题，每个图表最多仅有一个标题控件，每个标题控件可设主副标题  
 						title : {
 							//主标题文本，'\n'指定换行  
-							text : '订单数据分析',
+							text : '浏览器的PV分析',
 							//主标题文本超链接  
 							link : 'http://www.tqyb.com.cn/weatherLive/climateForecast/2014-01-26/157.html',
 							//副标题文本，'\n'指定换行  
@@ -77,7 +86,7 @@
 							//垂直安放位置，默认为全图顶端，可选为：'top' | 'bottom' | 'center' | {number}（y坐标，单位px）  
 							y : 'top',
 							//legend的data: 用于设置图例，data内的字符串数组需要与sereis数组内每一个series的name值对应  
-							data : [ '订单ID','成功单数','退款单数','成交金额']
+							data : [ 'pv深度']
 						},
 						//工具箱，每个图表最多仅有一个工具箱  
 						toolbox : {
@@ -105,7 +114,7 @@
 								//magicType，动态类型切换，支持直角系下的折线图、柱状图、堆积、平铺转换  
 								magicType : {
 									show : true,
-									type : [ 'line', 'bar','pie' ]
+									type : [ 'line', 'bar']
 								},
 								//restore，还原，复位原始图表  
 								restore : {
@@ -122,19 +131,19 @@
 						//直角坐标系中横轴数组，数组中每一项代表一条横轴坐标轴，仅有一条时可省略数值  
 						//横轴通常为类目型，但条形图时则横轴为数值型，散点图时则横纵均为数值型  
 						xAxis : [ {
-							name : '日期',
+							name : '浏览器',
 							//显示策略，可选为：true（显示） | false（隐藏），默认值为true  
 							show : true,
 							//坐标轴类型，横轴默认为类目型'category'  
 							type : 'category',
 							//类目型坐标轴文本标签数组，指定label内容。 数组项通常为文本，'\n'指定换行  
-							data : listXaxis
+							data : browser
 						} ],
 						//直角坐标系中纵轴数组，数组中每一项代表一条纵轴坐标轴，仅有一条时可省略数值  
 						//纵轴通常为数值型，但条形图时则纵轴为类目型  
 						yAxis : [ {
 							
-							name : '成交金额',
+							name : '总数',
 							//显示策略，可选为：true（显示） | false（隐藏），默认值为true  
 							show : true,
 							//坐标轴类型，纵轴默认为数值型'value'  
@@ -149,11 +158,11 @@
 						series : [
 								{
 									//系列名称，如果启用legend，该值将被legend.data索引相关  
-									name : '订单ID',
+									name : 'pv深度',
 									//图表类型，必要参数！如为空或不支持类型，则该系列数据不被显示。  
 									type : 'line',
 									//系列中的数据内容数组，折线图以及柱状图时数组长度等于所使用类目轴文本标签数组axis.data的长度，并且他们间是一一对应的。数组项通常为数值  
-									data :oid,
+									data :adduserCount,
 									//系列中的数据标注内容  
 									markPoint : {
 										data : [ {
@@ -173,95 +182,15 @@
 									}
 								
 								},
-								{
-									//系列名称，如果启用legend，该值将被legend.data索引相关  
-									name : '成功订单',
-									//图表类型，必要参数！如为空或不支持类型，则该系列数据不被显示。  
-									type : 'line',
-									//系列中的数据内容数组，折线图以及柱状图时数组长度等于所使用类目轴文本标签数组axis.data的长度，并且他们间是一一对应的。数组项通常为数值  
-									data :successCount,
-									//系列中的数据标注内容  
-									markPoint : {
-										data : [ {
-											type : 'max',
-											name : '最大值'
-										}, {
-											type : 'min',
-											name : '最小值'
-										} ]
-									},
-									//系列中的数据标线内容  
-									markLine : {
-										data : [ {
-											type : 'average',
-											name : '平均值'
-										} ]
-									}
-								
-								},
-								{
-									//系列名称，如果启用legend，该值将被legend.data索引相关  
-									name : '退款订单',
-									//图表类型，必要参数！如为空或不支持类型，则该系列数据不被显示。  
-									type : 'line',
-									//系列中的数据内容数组，折线图以及柱状图时数组长度等于所使用类目轴文本标签数组axis.data的长度，并且他们间是一一对应的。数组项通常为数值  
-									data :refundCount,
-									//系列中的数据标注内容  
-									markPoint : {
-										data : [ {
-											type : 'max',
-											name : '最大值'
-										}, {
-											type : 'min',
-											name : '最小值'
-										} ]
-									},
-									//系列中的数据标线内容  
-									markLine : {
-										data : [ {
-											type : 'average',
-											name : '平均值'
-										} ]
-									}
-								
-								},
-								{
-									//系列名称，如果启用legend，该值将被legend.data索引相关  
-									name : '成交金额',
-									//图表类型，必要参数！如为空或不支持类型，则该系列数据不被显示。  
-									type : 'line',
-									//系列中的数据内容数组，折线图以及柱状图时数组长度等于所使用类目轴文本标签数组axis.data的长度，并且他们间是一一对应的。数组项通常为数值  
-									data :orderCount,
-									//系列中的数据标注内容  
-									markPoint : {
-										data : [ {
-											type : 'max',
-											name : '最大值'
-										}, {
-											type : 'min',
-											name : '最小值'
-										} ]
-									},
-									//系列中的数据标线内容  
-									markLine : {
-										data : [ {
-											type : 'average',
-											name : '平均值'
-										} ]
-									}
-								
-								}
-								]
+							]
 					};
 
-					
 					myChart.setOption(option);
 				
 			}});
-			
-			//setTimeout("test()", 2000);
 		}
-		setTimeout("test()", 2000);
+		setTimeout("test()", 1000);
+
 	</script>
 </body>
 </html>

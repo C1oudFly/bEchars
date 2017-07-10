@@ -6,16 +6,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body onload="selecttimes()">
 
+<!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+    	<h5>请您选择要查询的日期：</h5>
+    <input id = "times" type="date" value="2017-06-19"  onchange="selecttimes()" />
 <div id="mainBar"
 		style="height: 500px; border: 1px solid #ccc; padding: 10px;"></div>
-	<script src="js/echarts.js"></script>
-	<script src="js/jquery.min.js"></script>
-	<script type="text/javascript">
-	
-	
-	var myChart;
+<script src="js/echarts.js"></script>
+<script src="js/jquery.min.js"></script>
+<script type="text/javascript">
+
+		var myChart;
 		var option;		
 		require.config({
 			paths : {
@@ -36,15 +38,24 @@
 				});
 		
 		var i=199;
+		
+		var sdate;
+		function selecttimes(){
+			sdate = document.getElementById('times').value;
+			console.log(sdate);	
+			test();
+		}
+		
 		function test()
 		{
-			var listXaxis = [1,1,1];
+			var browser = [1,1,1];
 			var adduserCount = [1,1,1];
 			var visitCount = [1,1,1]; 
 			var userCount = [1,1,1];
-			$.ajax({url:"/BigData/user/userList.xhtml",type:"GET",success:function(msg){
+			
+			$.ajax({url:"/BigData/browser/browseruserList.xhtml",data : {sdate : sdate},type:"GET",success:function(msg){
 				
-				listXaxis=msg.listXaxis;
+				browser = msg.browserData;
 				adduserCount=msg.adduserData;
 				visitCount=msg.visitData;
 				userCount=msg.userData;
@@ -53,7 +64,7 @@
 						//标题，每个图表最多仅有一个标题控件，每个标题控件可设主副标题  
 						title : {
 							//主标题文本，'\n'指定换行  
-							text : '用户分析',
+							text : '浏览器的用户分析',
 							//主标题文本超链接  
 							link : 'http://www.tqyb.com.cn/weatherLive/climateForecast/2014-01-26/157.html',
 							//副标题文本，'\n'指定换行  
@@ -124,13 +135,13 @@
 						//直角坐标系中横轴数组，数组中每一项代表一条横轴坐标轴，仅有一条时可省略数值  
 						//横轴通常为类目型，但条形图时则横轴为数值型，散点图时则横纵均为数值型  
 						xAxis : [ {
-							name : '日期',
+							name : '浏览器',
 							//显示策略，可选为：true（显示） | false（隐藏），默认值为true  
 							show : true,
 							//坐标轴类型，横轴默认为类目型'category'  
 							type : 'category',
 							//类目型坐标轴文本标签数组，指定label内容。 数组项通常为文本，'\n'指定换行  
-							data : listXaxis
+							data : browser
 						} ],
 						//直角坐标系中纵轴数组，数组中每一项代表一条纵轴坐标轴，仅有一条时可省略数值  
 						//纵轴通常为数值型，但条形图时则纵轴为类目型  
@@ -233,8 +244,10 @@
 					myChart.setOption(option);
 				
 			}});
+			
+			//setTimeout("test()", 2000);
 		}
-		setTimeout("test()", 0);
+		setTimeout("test()", 1000);
 	</script>
 </body>
 </html>

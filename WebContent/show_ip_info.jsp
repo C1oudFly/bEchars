@@ -290,10 +290,8 @@
 					myChart.setOption(option);
 				
 			}});
-			
-			//setTimeout("test()", 2000);
 		}
-		setTimeout("test()", 2000);
+		setTimeout("test()", 1000);
 	</script>
 </body>
 </html>

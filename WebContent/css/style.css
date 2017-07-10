@@ -110,24 +110,6 @@ body a{
 	background: -ms-linear-gradient(top,  rgba(50,58,62,1) 0%,rgba(46,54,58,1) 100%);
 	background: linear-gradient(to bottom,  rgba(50,58,62,1) 0%,rgba(46,54,58,1) 100%);
 }
-.top-nav ul li  a.black5{
-	background: rgb(51,58,62);
-	background: -moz-linear-gradient(top,  rgba(51,58,62,1) 0%, rgba(46,54,58,1) 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(51,58,62,1)), color-stop(100%,rgba(46,54,58,1)));
-	background: -webkit-linear-gradient(top,  rgba(51,58,62,1) 0%,rgba(46,54,58,1) 100%);
-	background: -o-linear-gradient(top,  rgba(51,58,62,1) 0%,rgba(46,54,58,1) 100%);
-	background: -ms-linear-gradient(top,  rgba(51,58,62,1) 0%,rgba(46,54,58,1) 100%);
-	background: linear-gradient(to bottom,  rgba(51,58,62,1) 0%,rgba(46,54,58,1) 100%);
-}
-.top-nav ul li  a.black6{
-	background: rgb(51,58,62);
-	background: -moz-linear-gradient(top,  rgba(51,58,62,1) 0%, rgba(46,54,58,1) 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(51,58,62,1)), color-stop(100%,rgba(46,54,58,1)));
-	background: -webkit-linear-gradient(top,  rgba(51,58,62,1) 0%,rgba(46,54,58,1) 100%);
-	background: -o-linear-gradient(top,  rgba(51,58,62,1) 0%,rgba(46,54,58,1) 100%);
-	background: -ms-linear-gradient(top,  rgba(51,58,62,1) 0%,rgba(46,54,58,1) 100%);
-	background: linear-gradient(to bottom,  rgba(51,58,62,1) 0%,rgba(46,54,58,1) 100%);
-}
 .top-nav ul li  a:hover,.top-nav ul li.active a {
 	background: #23aeac;
 }

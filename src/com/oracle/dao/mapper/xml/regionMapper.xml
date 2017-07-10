@@ -7,4 +7,10 @@
 		select date,region,regioncount,sessionnumber,sessionjumpnumber,jumprate
 			from pro_region;
 	</select>
+	
+	<select id="getRegionListBypro" parameterType="String" resultType="com.oracle.beipro.region.entity.Region">
+		select date,region,regioncount regionCount,sessionnumber sessionNumber,sessionjumpnumber sessionJumpnumber,jumprate jumpRate
+			from pro_region where date=#{sdate};
+	</select>
+	
 </mapper>

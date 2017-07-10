@@ -6,9 +6,15 @@ public class Region {
 	private int regionCount;
 	private int sessionNumber;
 	private int sessionJumpnumber;
-	private int jumpRate;
+	private double jumpRate;
 	
 	
+	public double getJumpRate() {
+		return jumpRate;
+	}
+	public void setJumpRate(double jumpRate) {
+		this.jumpRate = jumpRate;
+	}
 	public String getDate() {
 		return date;
 	}
@@ -38,12 +44,6 @@ public class Region {
 	}
 	public void setSessionJumpnumber(int sessionJumpnumber) {
 		this.sessionJumpnumber = sessionJumpnumber;
-	}
-	public int getJumpRate() {
-		return jumpRate;
-	}
-	public void setJumpRate(int jumpRate) {
-		this.jumpRate = jumpRate;
 	}
 	
 }

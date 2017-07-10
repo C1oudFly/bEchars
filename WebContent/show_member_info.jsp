@@ -42,7 +42,7 @@
 			var adduserCount = [1,1,1];
 			var visitCount = [1,1,1]; 
 			var userCount = [1,1,1];
-			$.ajax({url:"/BigData/user/userList.xhtml",type:"GET",success:function(msg){
+			$.ajax({url:"/BigData/user/memberList.xhtml",type:"GET",success:function(msg){
 				
 				listXaxis=msg.listXaxis;
 				adduserCount=msg.adduserData;
@@ -53,7 +53,7 @@
 						//标题，每个图表最多仅有一个标题控件，每个标题控件可设主副标题  
 						title : {
 							//主标题文本，'\n'指定换行  
-							text : '用户分析',
+							text : '会员分析',
 							//主标题文本超链接  
 							link : 'http://www.tqyb.com.cn/weatherLive/climateForecast/2014-01-26/157.html',
 							//副标题文本，'\n'指定换行  
@@ -79,7 +79,7 @@
 							//垂直安放位置，默认为全图顶端，可选为：'top' | 'bottom' | 'center' | {number}（y坐标，单位px）  
 							y : 'top',
 							//legend的data: 用于设置图例，data内的字符串数组需要与sereis数组内每一个series的name值对应  
-							data : [ '新增用户','活跃用户','总访客']
+							data : [ '新增会员','活跃会员','总会员']
 						},
 						//工具箱，每个图表最多仅有一个工具箱  
 						toolbox : {
@@ -151,7 +151,7 @@
 						series : [
 								{
 									//系列名称，如果启用legend，该值将被legend.data索引相关  
-									name : '新增用户',
+									name : '新增会员',
 									//图表类型，必要参数！如为空或不支持类型，则该系列数据不被显示。  
 									type : 'line',
 									//系列中的数据内容数组，折线图以及柱状图时数组长度等于所使用类目轴文本标签数组axis.data的长度，并且他们间是一一对应的。数组项通常为数值  
@@ -177,7 +177,7 @@
 								},
 								{
 									//系列名称，如果启用legend，该值将被legend.data索引相关  
-									name : '活跃用户',
+									name : '活跃会员',
 									//图表类型，必要参数！如为空或不支持类型，则该系列数据不被显示。  
 									type : 'line',
 									//系列中的数据内容数组，折线图以及柱状图时数组长度等于所使用类目轴文本标签数组axis.data的长度，并且他们间是一一对应的。数组项通常为数值  
@@ -203,7 +203,7 @@
 								},
 								{
 									//系列名称，如果启用legend，该值将被legend.data索引相关  
-									name : '总访客',
+									name : '总会员',
 									//图表类型，必要参数！如为空或不支持类型，则该系列数据不被显示。  
 									type : 'line',
 									//系列中的数据内容数组，折线图以及柱状图时数组长度等于所使用类目轴文本标签数组axis.data的长度，并且他们间是一一对应的。数组项通常为数值  

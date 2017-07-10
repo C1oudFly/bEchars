@@ -1,16 +1,30 @@
 package com.oracle.beipro.region.entity;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class RegionEntity {
-	List<String> listXaxis ;
+	List<String> listXaxis;
 	List<String> regionData;
 	List<Integer> regionCountData;
 	List<Integer> sessionNumberData;
 	List<Integer> sessionJumpnumberData;
-	List<Integer> jumpRateData;
+	List<Double> jumpRateData;
+	public List<Double> getJumpRateData() {
+		return jumpRateData;
+	}
+	public void setJumpRateData(List<Double> jumpRateData) {
+		this.jumpRateData = jumpRateData;
+	}
+	List<HashMap<String, String>> regionMap;
 	
-	
+
+	public List<HashMap<String, String>> getRegionMap() {
+		return regionMap;
+	}
+	public void setRegionMap(List<HashMap<String, String>> regionMap) {
+		this.regionMap = regionMap;
+	}
 	public List<String> getRegionData() {
 		return regionData;
 	}
@@ -42,12 +56,6 @@ public class RegionEntity {
 	}
 	public void setSessionJumpnumberData(List<Integer> sessionJumpnumberData) {
 		this.sessionJumpnumberData = sessionJumpnumberData;
-	}
-	public List<Integer> getJumpRateData() {
-		return jumpRateData;
-	}
-	public void setJumpRateData(List<Integer> jumpRateData) {
-		this.jumpRateData = jumpRateData;
 	}
 
 	

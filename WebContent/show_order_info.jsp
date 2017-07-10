@@ -15,7 +15,7 @@
 	<script type="text/javascript">
 	
 	
-	var myChart;
+		var myChart;
 		var option;		
 		require.config({
 			paths : {
@@ -39,21 +39,23 @@
 		function test()
 		{
 			var listXaxis = [1,1,1];
-			var adduserCount = [1,1,1];
-			var visitCount = [1,1,1]; 
-			var userCount = [1,1,1];
-			$.ajax({url:"/BigData/user/userList.xhtml",type:"GET",success:function(msg){
+			var oid = [1,1,1];
+			var successCount = [1,1,1];
+			var refundCount = [1,1,1]; 
+			var orderCount = [1,1,1];
+			$.ajax({url:"/BigData/order/orderList.xhtml",type:"GET",success:function(msg){
 				
 				listXaxis=msg.listXaxis;
-				adduserCount=msg.adduserData;
-				visitCount=msg.visitData;
-				userCount=msg.userData;
+				oid=msg.oidData;
+				successCount=msg.successData;
+				refundCount=msg.refundData;
+				orderCount=msg.orderData;
 				
 				option = {
 						//标题，每个图表最多仅有一个标题控件，每个标题控件可设主副标题  
 						title : {
 							//主标题文本，'\n'指定换行  
-							text : '用户分析',
+							text : '订单数据分析',
 							//主标题文本超链接  
 							link : 'http://www.tqyb.com.cn/weatherLive/climateForecast/2014-01-26/157.html',
 							//副标题文本，'\n'指定换行  
@@ -79,7 +81,7 @@
 							//垂直安放位置，默认为全图顶端，可选为：'top' | 'bottom' | 'center' | {number}（y坐标，单位px）  
 							y : 'top',
 							//legend的data: 用于设置图例，data内的字符串数组需要与sereis数组内每一个series的name值对应  
-							data : [ '新增用户','活跃用户','总访客']
+							data : ['订单ID','成功订单','退款订单','成交金额']
 						},
 						//工具箱，每个图表最多仅有一个工具箱  
 						toolbox : {
@@ -136,7 +138,7 @@
 						//纵轴通常为数值型，但条形图时则纵轴为类目型  
 						yAxis : [ {
 							
-							name : '总数',
+							name : '数量',
 							//显示策略，可选为：true（显示） | false（隐藏），默认值为true  
 							show : true,
 							//坐标轴类型，纵轴默认为数值型'value'  
@@ -151,11 +153,11 @@
 						series : [
 								{
 									//系列名称，如果启用legend，该值将被legend.data索引相关  
-									name : '新增用户',
+									name : '订单ID',
 									//图表类型，必要参数！如为空或不支持类型，则该系列数据不被显示。  
 									type : 'line',
 									//系列中的数据内容数组，折线图以及柱状图时数组长度等于所使用类目轴文本标签数组axis.data的长度，并且他们间是一一对应的。数组项通常为数值  
-									data :adduserCount,
+									data :oid,
 									//系列中的数据标注内容  
 									markPoint : {
 										data : [ {
@@ -177,11 +179,11 @@
 								},
 								{
 									//系列名称，如果启用legend，该值将被legend.data索引相关  
-									name : '活跃用户',
+									name : '成功订单',
 									//图表类型，必要参数！如为空或不支持类型，则该系列数据不被显示。  
 									type : 'line',
 									//系列中的数据内容数组，折线图以及柱状图时数组长度等于所使用类目轴文本标签数组axis.data的长度，并且他们间是一一对应的。数组项通常为数值  
-									data :visitCount,
+									data :successCount,
 									//系列中的数据标注内容  
 									markPoint : {
 										data : [ {
@@ -203,11 +205,11 @@
 								},
 								{
 									//系列名称，如果启用legend，该值将被legend.data索引相关  
-									name : '总访客',
+									name : '退款订单',
 									//图表类型，必要参数！如为空或不支持类型，则该系列数据不被显示。  
 									type : 'line',
 									//系列中的数据内容数组，折线图以及柱状图时数组长度等于所使用类目轴文本标签数组axis.data的长度，并且他们间是一一对应的。数组项通常为数值  
-									data :userCount,
+									data :refundCount,
 									//系列中的数据标注内容  
 									markPoint : {
 										data : [ {
@@ -227,14 +229,41 @@
 									}
 								
 								},
-							]
+								{
+									//系列名称，如果启用legend，该值将被legend.data索引相关  
+									name : '成交金额',
+									//图表类型，必要参数！如为空或不支持类型，则该系列数据不被显示。  
+									type : 'line',
+									//系列中的数据内容数组，折线图以及柱状图时数组长度等于所使用类目轴文本标签数组axis.data的长度，并且他们间是一一对应的。数组项通常为数值  
+									data :orderCount,
+									//系列中的数据标注内容  
+									markPoint : {
+										data : [ {
+											type : 'max',
+											name : '最大值'
+										}, {
+											type : 'min',
+											name : '最小值'
+										} ]
+									},
+									//系列中的数据标线内容  
+									markLine : {
+										data : [ {
+											type : 'average',
+											name : '平均值'
+										} ]
+									}
+								
+								}
+								]
 					};
 
+					
 					myChart.setOption(option);
 				
 			}});
 		}
-		setTimeout("test()", 0);
+		setTimeout("test()", 1000);
 	</script>
 </body>
 </html>

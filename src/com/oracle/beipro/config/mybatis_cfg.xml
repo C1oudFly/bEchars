@@ -18,6 +18,8 @@
 	<mappers>
 		<mapper resource="com/oracle/dao/mapper/xml/orderMapper.xml" />
 		<mapper resource="com/oracle/dao/mapper/xml/regionMapper.xml" />
+		<mapper resource="com/oracle/dao/mapper/xml/userMapper.xml" />
+		<mapper resource="com/oracle/dao/mapper/xml/browserMapper.xml" />
 	</mappers>
 	
 </configuration>
